@@ -7,7 +7,7 @@ import RootLayout from "@/layouts/root-layout";
 import HomePage from "@/pages/HomePage";
 import EnrollmentPage from "@/pages/EnrollmentPage";
 
-import "./index.css";
+import "./index.css"; 
 
 const router = createBrowserRouter([
   {
