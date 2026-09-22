@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -12,6 +13,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { currentUser } from "@/lib/mock-data";
 
 const items = [
   { title: "หน้าแรก", url: "/", icon: Home },
@@ -35,7 +40,6 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  {/* ✅ แก้ไข: Base UI ใช้ `render={<Link />}` แทน `asChild` */}
                   <SidebarMenuButton
                     isActive={location.pathname === item.url}
                     render={<Link to={item.url} />}
@@ -49,6 +53,26 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      <SidebarFooter className="p-4">
+        <Separator className="mb-4" />
+        <div className="flex items-center gap-3">
+          <Avatar className="h-9 w-9">
+            <AvatarImage src={currentUser.avatar} alt={currentUser.nickname} />
+            <AvatarFallback>{currentUser.nickname[0]}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col gap-1">
+            <span className="text-sm font-medium leading-none">
+              {currentUser.nickname}
+            </span>
+            <div>
+              <Badge variant="outline" className="text-[10px] px-1.5 py-0">
+                {currentUser.role}
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
